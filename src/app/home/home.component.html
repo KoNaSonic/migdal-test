@@ -1,0 +1,201 @@
+<!-- main app container -->
+<div class="container mt-5 border" style="min-width: 70vw; background-color: lightblue;">
+
+  <!--<div class="container p-3 bg-light">-->
+
+    <!--<div class="row">-->
+      <!--<div class="pr-5 offset-sm-1">-->
+        <!--<span>תטיעת על: 5000038313</span>-->
+      <!--</div>-->
+      <!--<div class="pr-5 offset-sm-1">-->
+        <!--<span>מצב תביעה: פתוחה</span>-->
+      <!--</div>-->
+      <!--<div class=" mr-auto col-2  offset-sm-1">-->
+        <!--<button class="btn btn-info btn-block" type="reset" (click)="onReset()">רעסן תהליך</button>-->
+      <!--</div>-->
+
+  <!--</div>-->
+
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+      <div class="container mt-5 border bg-light">
+
+        <div class="row my-3">
+          <div class="mr-5 pt-1 offset-sm-1">
+            <span>תטיעת על: 5000038313</span>
+          </div>
+          <div class="mr-5 pt-1 offset-sm-1">
+            <span>מצב תביעה: פתוחה</span>
+          </div>
+          <div class=" mr-auto col-2  offset-sm-1">
+            <button class="btn btn-info btn-block" type="reset" (click)="onReset()">רעסן תהליך</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container " style="height: 5vh; background-color: aliceblue; text-align: right">
+        <h5 class="pt-2 pr-2">ריכוז מידע בתהליך</h5>
+      </div>
+
+
+      <div class="container py-4"style="background-color: white;">
+
+        <div class="row mt-2 mb-2" style="text-align: right">
+          <div class="col-sm-2 mr-5">פרטי מבוטח:</div>
+          <div class="col-sm-2">מריה ג'יין</div>
+          <div class="col-sm-2">27854122145</div>
+          <div class="col-sm-1">35</div>
+          <div class="col-sm-2  offset-sm-2">אחוזה,רעננה</div>
+        </div>
+
+        <div class="row mt-2 mb-4" style="text-align: right">
+          <div class="col-sm-2 mr-5"></div>
+          <div class="col-sm-2">שם</div>
+          <div class="col-sm-2">ת.ז.</div>
+          <div class="col-sm-1">גיל</div>
+          <div class="col-sm-2  offset-sm-1">כתובת</div>
+        </div>
+
+  <!--<div class="container px-0 border bg-light">-->
+
+
+      </div>
+
+
+      <!--</div>-->
+
+    <div class="container  bg-light">
+      <!--<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">-->
+
+        <div class="form-row">
+
+          <div class="form-group col-4">
+            <label>:סוג תביעת על</label>
+            <select formControlName="title" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+              <option value="">התביעה אושרה</option>
+              <option value="code: 2">התביעה נדחתה</option>
+              <option value="code: 4">טרם התקבלה החלטה</option>
+            </select>
+          </div>
+
+
+          <div class="form-group col-3">
+            <label>:תאריך אירוע</label>
+            <input type="date" formControlName="dob" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
+          </div>
+
+
+        </div>
+        <div class="form-row">
+
+          <div class="form-group col-4">
+            <label>:סיבת אירוע</label>
+            <select formControlName="title" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+              <option value="">תאונה</option>
+              <option value="code: 2">מחלה</option>
+              <option value="code: 5">תאונת עבודה</option>
+              <option value="code: 6">אחר</option>
+            </select>
+          </div>
+
+          <div class="form-group col-4">
+            <label>:מהות אירוע</label>
+            <select formControlName="title" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+              <option value="">אגן</option>
+              <option value="code: 2">גפיים</option>
+              <option value="code: 5">ראש</option>
+              <option value="code: 6">גב</option>
+              <option value="code: 7">לב</option>
+              <option value="code: 9">נפש</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+
+          <div class="form-group col-4">
+            <label>:הוגשה באמצעות</label>
+            <select formControlName="title" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+              <option value="">מבוטח</option>
+              <option value="code: 2">סוכן</option>
+              <option value="code: 3">בן/בת זוג</option>
+            </select>
+          </div>
+
+          <div class="form-group col-4">
+            <label>:אופן קבלת התביעה</label>
+            <select formControlName="title" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+              <option value="">דואר</option>
+              <option value="code: 2">דיגיטל</option>
+              <option value="code: 3">פקס</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!--<div class="text-center">-->
+          <!--<button class="btn btn-info ml-3">Register</button>-->
+          <!--<button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>-->
+        <!--</div>-->
+      <!--</form>-->
+
+      <!--<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>-->
+        <!--<input formControlName="firstName" placeholder="Your name">-->
+        <!--<input formControlName="email" placeholder="Your email">-->
+        <!--<input formControlName="phoneNumber" placeholder="Your message">-->
+        <!--<button type="submit">Register</button>-->
+      <!--</form>-->
+
+    </div>
+
+
+
+
+
+      <div class="container px-0 border">
+
+        <div class="container" style="height: 5vh; background-color: aliceblue; text-align: right">
+          <h5 class="pt-2 pr-3">ריכוז אנשי קשר</h5>
+        </div>
+
+        <div class="container p-3 bg-white">
+
+          <div class="row">
+            <div class="mr-5 pt-1">
+              <span>מספר אנשי קשר בתהליך: 2</span>
+            </div>
+            <div class="mx-5 pt-1">
+              <span>פעולות אפשריות:</span>
+            </div>
+            <div class="col-2">
+              <button class="btn btn-info btn-block" type="reset" (click)="onReset()">הוספת מבוטח</button>
+            </div>
+            <div class="col-2">
+              <button class="btn btn-info btn-block" type="reset" (click)="onReset()">איפוס מלא</button>
+            </div>
+            <div class="col-2">
+              <button class="btn btn-info btn-block" type="reset" (click)="onReset()">איפוס אנשי קשר</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="d-flex flex-row-reverse pl-5 ml-5 my-4">
+        <button class="btn btn-info disabled" type="reset" (click)="onReset()">המשך  ---></button>
+      </div>
+
+   </form>
+
+ <app-contact></app-contact>
+
+</div>
