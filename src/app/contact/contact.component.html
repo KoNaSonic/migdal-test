@@ -6,7 +6,7 @@
     <h5 class="pt-2 pr-3">אנשי קשר</h5>
   </div>
 
-  <table class="table table-bordered table-striped">
+  <table class="table table-bordered table-striped" style="text-align: right">
     <thead>
     <tr>
       <th style="width: 5%">מועדף</th>
@@ -21,9 +21,9 @@
     <tbody>
     <tr>
       <td>
-         <div class="input-group-text">
-           <input type="checkbox">
-         </div>
+        <div class="input-group-text">
+            <input type="checkbox" value="something" checked>
+        </div>
       </td>
       <td>ניקיטה ג'יין</td>
       <td>מבוטח</td>
@@ -35,7 +35,7 @@
     <tr>
       <td>
         <div class="input-group-text">
-          <input type="checkbox">
+          <input type="checkbox" value="something" checked>
         </div>
       </td>
       <td>טוביה בצקי</td>
@@ -45,15 +45,158 @@
       <td></td>
     </tr>
 
+    <tr *ngFor="let contact of contactPersons">
+      <td>
+        <div class="input-group-text">
+          <input type="checkbox">
+        </div>
+      </td>
+      <td>{{contact.name}}</td>
+      <td>{{contact.type}}</td>
+      <td>{{contact.address}}</td>
+      <td>{{contact.phoneNumber}}</td>
+      <td>{{contact.email}}</td>
+    </tr>
+
     </tbody>
 
   </table>
 
-  <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link" href="#">הוסף איש קשר</a>
-    </li>
-  </ul>
+  <div id="showContact" class="container mt-3 px-0" style="display: none">
+
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+
+      <div class="row mx-0 py-2 input-group" style="text-align: right">
+
+
+        <div class="col px-1">
+          <input formControlName="deliveryFlag" class="form-control" type="checkbox" [ngClass]="{ 'is-invalid': submitted && f.deliveryFlag.errors }" />
+          <div *ngIf="submitted && f.deliveryFlag.errors" class="invalid-feedback">
+            <div *ngIf="f.deliveryFlag.errors"></div>
+          </div>
+        </div>
+
+        <div class="col-sm-2 px-1">
+          <input formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors">הזן את שמך</div>
+          </div>
+        </div>
+
+        <div class="col-sm-2 px-1">
+          <select formControlName="types" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.types.errors}">
+            <option value=""></option>
+            <option *ngFor="let type of types">{{type}}</option>
+          </select>
+          <div *ngIf="submitted && f.types.errors" class="invalid-feedback">
+            <div *ngIf="f.types.errors">בחר סוג</div>
+          </div>
+        </div>
+
+        <div class="col-sm-3 px-1">
+          <input formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+          <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors">הכנס כתובת</div>
+          </div>
+        </div>
+
+        <div class="col-sm-2 px-1">
+          <input formControlName="phoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
+          <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+            <div *ngIf="f.phoneNumber.errors">הזן מספר טלפון סוג 050-1234567</div>
+          </div>
+        </div>
+
+        <div class="col-sm-2 px-1">
+          <input formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors">הזן את כתובת הדוא"ל שלך</div>
+          </div>
+        </div>
+
+        <div class="pl-1">
+          <!--<button type="submit" [disabled]="!contactForm.valid" (click)="onSubmit()"><i class="fa fa-plus-square" style="font-size:36px;color: lightgrey"></i></button>-->
+          <i class="fa fa-plus-square" style="font-size:36px;color: lightgrey" (click)="onSubmit(); createUser(); hideContact()"></i>
+        </div>
+
+      </div>
+
+      <!--<div class="row mx-0 py-2 input-group" style="text-align: right" formArrayName="contacts" *ngFor="let c of contacts.controls; let i = index">-->
+
+        <!--<div class="col px-1">-->
+          <!--<input formControlName="deliveryFlag" id="{{'deliveryFlag'+i}}" type="checkbox" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.deliveryFlag.errors }" />-->
+          <!--<div *ngIf="submitted && f.deliveryFlag.errors" class="invalid-feedback">-->
+            <!--<div *ngIf="f.deliveryFlag.errors"></div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-sm-2 px-1">-->
+          <!--<input formControlName="name"  id="{{'name'+i}}" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />-->
+          <!--<div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
+            <!--<div *ngIf="f.name.errors">הזן את שמך</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-sm-2 px-1">-->
+          <!--<select formControlName="types"  id="{{'types'+i}}" type="text" class="form-control"-->
+                  <!--[ngClass]="{ 'is-invalid': submitted && f.types.errors}">-->
+            <!--<option value=""></option>-->
+            <!--<option *ngFor="let type of types">{{type}}</option>-->
+          <!--</select>-->
+          <!--<div *ngIf="submitted && f.types.errors" class="invalid-feedback">-->
+            <!--<div *ngIf="f.types.errors">בחר סוג</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-sm-3 px-1">-->
+          <!--<input formControlName="address"  id="{{'address'+i}}" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />-->
+          <!--<div *ngIf="submitted && f.address.errors" class="invalid-feedback">-->
+            <!--<div *ngIf="f.address.errors">הכנס כתובת</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-sm-2 px-1">-->
+          <!--<input formControlName="phoneNumber"  id="{{'phoneNumber'+i}}" type="tel" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />-->
+          <!--<div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">-->
+            <!--<div *ngIf="f.phoneNumber.errors">הזן מספר טלפון סוג 050-1234567</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-sm-2 px-1">-->
+          <!--<input formControlName="email" id="{{'email'+i}}" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />-->
+          <!--<div *ngIf="submitted && f.email.errors" class="invalid-feedback">-->
+            <!--<div *ngIf="f.email.errors">הזן את כתובת הדוא"ל שלך</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="pl-1">-->
+          <!--<i class="fa fa-plus-square" style="font-size:36px;color: lightgrey" (click)="onSubmit(); createUser()"></i>-->
+        <!--</div>-->
+
+      <!--</div>-->
+
+    </form>
+
+  </div>
+
+  <!--<ul class="nav">-->
+
+    <!--<li class="nav-item">-->
+      <!--<a class="nav-link" (click)="addContact()" >הוסף איש קשר</a>-->
+    <!--</li>-->
+
+    <!--<li class="nav-item">-->
+      <!--<a class="nav-link" (click)="showContact()" >הוסף איש קשר</a>-->
+    <!--</li>-->
+  <!--</ul>-->
+
+
+  <div class="d-flex justify-content-start">
+    <button type="button" class="btn btn-link" (click)="showContact()" >הוסף איש קשר</button>
+  </div>
+
+
 
   <!--<div class="d-flex justify-content-start pb-2">-->
 
@@ -64,5 +207,7 @@
   <!--</div>-->
 
 </div>
+
+
 
 

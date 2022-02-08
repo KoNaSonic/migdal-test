@@ -1,88 +1,47 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from "@angular/forms";
 
 import {MustMatch} from "../_helpers";
-
+import {contactPersons} from "../_models/contact";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent{
+export class HomeComponent implements OnInit{
 
-  submitted = false;
+    registrationForm!: FormGroup;
+    submitted = false;
 
-  // City names
-  City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
+    submittedBy: any = [ 'מבוטח', 'סוכן', 'בן/בת זוג'];
 
-  contactPersonType: any = [
-    { code: 1, value: 'מבוטח' },
-    { code: 2, value: 'סוכן' },
-    { code: 3, value: 'בן/בת זוג' }];
+    superClaimType: any = ['התביעה אושרה', 'התביעה נדחתה', 'טרם התקבלה החלטה'];
 
-  superClaimType: any = [
-    { code: 1, value: "התביעה אושרה" },
-    { code: 2, value: "התביעה נדחתה" },
-    { code: 4, value: "טרם התקבלה החלטה" }]
-;
-  claimCause: any = [
-    { code: 1, value: "תאונה" },
-    { code: 2, value: "מחלה" },
-    { code: 5, value: "תאונת עבודה" },
-    { code: 6, value: "אחר" }];
+    claimCause: any = ["תאונה", "מחלה", "תאונת עבודה", "אחר"];
 
-  injuryType: any = [
-    { code: 1, value: "אגן" },
-    { code: 2, value: "גפיים" },
-    { code: 5, value: "ראש" },
-    { code: 6, value: "גב" },
-    { code: 7, value: "לב" },
-    { code: 9, value: "נפש" }];
+    injuryType: any = ["אגן", "גפיים", "ראש", "גב", "לב", "נפש"];
 
-  submitionMethod: any = [
-    { code: 1, value: 'דואר' },
-    { code: 2, value: 'דיגיטל' },
-    { code: 3, value: 'פקס' }];
+    submitionMethod: any = ['דואר', 'דיגיטל', 'פקס'];
 
-  identityTypes: any = [
-    { code: 1, value: 'ת.ז.' },
-    { code: 2, value: 'דרכון' },
-    { code: 3, value: 'מבוטח' },
-    { code: 4, value: 'מפעל' }];
+    constructor(private fb: FormBuilder) { }
 
-  constructor(public fb: FormBuilder) { }
-
-  registrationForm = this.fb.group({
-    file: [null],
-    fullName: this.fb.group({
-      firstName: [''],
-      lastName: ['']
-    }),
-    email: [''],
-    phoneNumber: [''],
-    address: this.fb.group({
-      street: [''],
-      city: [''],
-      cityName: ['']
-    }),
-    gender: [''],
-    PasswordValidation: this.fb.group({
-      password: [''],
-      confirmPassword: ['']
-    }),
-    addDynamicElement: this.fb.array([])
-  });
+  ngOnInit() {
+    this.registrationForm = this.fb.group({
+      superClaimType: ['', [Validators.required]],
+      eventDate: ['', [Validators.required, Validators.pattern
+      // (/^[0-3]?[0-9].[0-3]?[0-9].(?:[0-9]{2})?[0-9]{2}$/)]],
+      (/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
+      claimCause: ['', [Validators.required]],
+      injuryType: ['', [Validators.required]],
+      submittedBy: ['', [Validators.required]],
+      submitionMethod: ['', [Validators.required]],
+      addDynamicElement: this.fb.array([])
+    });
+  }
 
 // convenience getter for easy access to form fields
   get f() { return this.registrationForm.controls; }
-
-  // Choose city using select dropdown
-  // changeCity(e) {
-  //   this.registrationForm.get('address.cityName').setValue(e.target.value, {
-  //     onlySelf: true
-  //   })
-  // }
 
   onSubmit() {
     this.submitted = true;
@@ -93,12 +52,16 @@ export class HomeComponent{
     }
 
     // display form values on success
+    // alert(JSON.stringify(this.registrationForm.value))
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registrationForm.value, null, 4));
+
   }
 
   onReset() {
     this.submitted = false;
     this.registrationForm.reset();
   }
+
+
 
 }

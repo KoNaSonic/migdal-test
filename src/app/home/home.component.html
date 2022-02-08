@@ -1,21 +1,6 @@
 <!-- main app container -->
-<div class="container mt-5 border" style="min-width: 70vw; background-color: lightblue;">
 
-  <!--<div class="container p-3 bg-light">-->
-
-    <!--<div class="row">-->
-      <!--<div class="pr-5 offset-sm-1">-->
-        <!--<span>תטיעת על: 5000038313</span>-->
-      <!--</div>-->
-      <!--<div class="pr-5 offset-sm-1">-->
-        <!--<span>מצב תביעה: פתוחה</span>-->
-      <!--</div>-->
-      <!--<div class=" mr-auto col-2  offset-sm-1">-->
-        <!--<button class="btn btn-info btn-block" type="reset" (click)="onReset()">רעסן תהליך</button>-->
-      <!--</div>-->
-
-  <!--</div>-->
-
+<div class="container mt-5 px-5 border bg-light" style="background-color: lightblue;">
 
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
 
@@ -38,8 +23,7 @@
         <h5 class="pt-2 pr-2">ריכוז מידע בתהליך</h5>
       </div>
 
-
-      <div class="container py-4"style="background-color: white;">
+      <div class="container py-3"style="background-color: white;">
 
         <div class="row mt-2 mb-2" style="text-align: right">
           <div class="col-sm-2 mr-5">פרטי מבוטח:</div>
@@ -57,107 +41,113 @@
           <div class="col-sm-2  offset-sm-1">כתובת</div>
         </div>
 
-  <!--<div class="container px-0 border bg-light">-->
-
-
       </div>
 
+    <div class="container border bg-light" >
 
-      <!--</div>-->
+        <div class="row input-group pt-4" style="text-align: right">
 
-    <div class="container  bg-light">
-      <!--<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">-->
+            <div class="col-sm-2 pt-2" >
+              <span>סוג תביעת על:</span>
+            </div>
 
-        <div class="form-row">
+            <div class="col-sm-3">
+              <select formControlName="superClaimType" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.superClaimType.errors}">
+                <!--<option value="">בחר סוג תביעה...</option>-->
+                <option value=""></option>
+                <option *ngFor="let claimType of superClaimType">{{claimType}}</option>
+              </select>
+              <div *ngIf="submitted && f.superClaimType.errors" class="invalid-feedback">
+                <div *ngIf="f.superClaimType.errors">נדרש סוג תביעה</div>
+              </div>
+            </div>
 
-          <div class="form-group col-4">
-            <label>:סוג תביעת על</label>
-            <select formControlName="title" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-              <option value="">התביעה אושרה</option>
-              <option value="code: 2">התביעה נדחתה</option>
-              <option value="code: 4">טרם התקבלה החלטה</option>
-            </select>
-          </div>
+            <div class="col-sm-2 pt-2" >
+              <span>תאריך אירוע:</span>
+            </div>
 
-
-          <div class="form-group col-3">
-            <label>:תאריך אירוע</label>
-            <input type="date" formControlName="dob" class="form-control"
-                   [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
-          </div>
-
-
-        </div>
-        <div class="form-row">
-
-          <div class="form-group col-4">
-            <label>:סיבת אירוע</label>
-            <select formControlName="title" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-              <option value="">תאונה</option>
-              <option value="code: 2">מחלה</option>
-              <option value="code: 5">תאונת עבודה</option>
-              <option value="code: 6">אחר</option>
-            </select>
-          </div>
-
-          <div class="form-group col-4">
-            <label>:מהות אירוע</label>
-            <select formControlName="title" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-              <option value="">אגן</option>
-              <option value="code: 2">גפיים</option>
-              <option value="code: 5">ראש</option>
-              <option value="code: 6">גב</option>
-              <option value="code: 7">לב</option>
-              <option value="code: 9">נפש</option>
-            </select>
-          </div>
+            <i class="mr-3 pt-2 fa fa-calendar-o" style="font-size:24px"></i>
+            <div class="col-sm-2">
+              <input type="date" formControlName="eventDate" class="form-control"
+                     [ngClass]="{ 'is-invalid': submitted && f.eventDate.errors }" />
+              <div *ngIf="submitted && f.eventDate.errors" class="invalid-feedback">
+                <div *ngIf="f.eventDate.errors">בחר תאריך</div>
+              </div>
+            </div>
         </div>
 
-        <div class="form-row">
+        <div class="row input-group pt-3" style="text-align: right">
 
-          <div class="form-group col-4">
-            <label>:הוגשה באמצעות</label>
-            <select formControlName="title" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-              <option value="">מבוטח</option>
-              <option value="code: 2">סוכן</option>
-              <option value="code: 3">בן/בת זוג</option>
-            </select>
-          </div>
+            <div class="col-sm-2 pt-2" >
+              <span >סיבת אירוע:</span>
+            </div>
 
-          <div class="form-group col-4">
-            <label>:אופן קבלת התביעה</label>
-            <select formControlName="title" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-              <option value="">דואר</option>
-              <option value="code: 2">דיגיטל</option>
-              <option value="code: 3">פקס</option>
-            </select>
-          </div>
+            <div class="col-sm-3">
+              <select formControlName="claimCause" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.claimCause.errors }">
+                <!--<option value="">בחר עילה לתביעה...</option>-->
+                <option value=""></option>
+                <option *ngFor="let cause of claimCause">{{cause}}</option>
+              </select>
+              <div *ngIf="submitted && f.claimCause.errors" class="invalid-feedback">
+                <div *ngIf="f.claimCause.errors">נדרשת תביעת עילה</div>
+              </div>
+            </div>
 
+            <div class="col-sm-2 pt-2" >
+              <span >מהות אירוע:</span>
+            </div>
+
+            <div class="col-sm-3">
+                <select formControlName="injuryType" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.injuryType.errors }">
+                  <!--<option value="">בחר סוג פציעה...</option>-->
+                  <option value=""></option>
+                  <option *ngFor="let injury of injuryType">{{injury}}</option>
+              </select>
+              <div *ngIf="submitted && f.injuryType.errors" class="invalid-feedback">
+                <div *ngIf="f.injuryType.errors">נדרש סוג פציעה</div>
+              </div>
+            </div>
         </div>
 
-        <!--<div class="text-center">-->
-          <!--<button class="btn btn-info ml-3">Register</button>-->
-          <!--<button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>-->
-        <!--</div>-->
-      <!--</form>-->
+        <div class="row input-group pt-3 pb-5" style="text-align: right">
 
-      <!--<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>-->
-        <!--<input formControlName="firstName" placeholder="Your name">-->
-        <!--<input formControlName="email" placeholder="Your email">-->
-        <!--<input formControlName="phoneNumber" placeholder="Your message">-->
-        <!--<button type="submit">Register</button>-->
-      <!--</form>-->
+            <div class="col-sm-2 pt-2" >
+              <span >הוגשה באמצעות:</span>
+            </div>
+
+            <div class="col-sm-3">
+              <select formControlName="submittedBy" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.submittedBy.errors }">
+                <!--<option value="">בחר נשלח על ידי...</option>-->
+                <option value=""></option>
+                <option *ngFor="let submitted of submittedBy">{{submitted}}</option>
+              </select>
+              <div *ngIf="submitted && f.submittedBy.errors" class="invalid-feedback">
+                <div *ngIf="f.submittedBy.errors">הוגש על ידי נדרש</div>
+              </div>
+            </div>
+
+            <div class="col-sm-2 pt-2" >
+              <span >אופן קבלת התביעה:</span>
+            </div>
+
+            <div class="col-sm-3">
+                  <select formControlName="submitionMethod" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.submitionMethod.errors }">
+                    <!--<option value="">בחר שיטת הגשה...</option>-->
+                    <option value=""></option>
+                    <option *ngFor="let submition of submitionMethod">{{submition}}</option>
+              </select>
+              <div *ngIf="submitted && f.submitionMethod.errors" class="invalid-feedback">
+                <div *ngIf="f.submitionMethod.errors">נדרשת שיטת הגשה</div>
+              </div>
+            </div>
+          </div>
 
     </div>
-
-
-
-
 
       <div class="container px-0 border">
 
@@ -168,34 +158,39 @@
         <div class="container p-3 bg-white">
 
           <div class="row">
-            <div class="mr-5 pt-1">
+            <div class="col-sm-3  pt-1">
               <span>מספר אנשי קשר בתהליך: 2</span>
             </div>
-            <div class="mx-5 pt-1">
+            <div class="col-sm-2  pt-1">
               <span>פעולות אפשריות:</span>
             </div>
-            <div class="col-2">
-              <button class="btn btn-info btn-block" type="reset" (click)="onReset()">הוספת מבוטח</button>
+            <div class="col-sm-2">
+              <button class="btn btn-info btn-block" type="submit" (click)="onSubmit()">הוספת מבוטח</button>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2">
               <button class="btn btn-info btn-block" type="reset" (click)="onReset()">איפוס מלא</button>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2">
               <button class="btn btn-info btn-block" type="reset" (click)="onReset()">איפוס אנשי קשר</button>
             </div>
           </div>
+        </div>
+
+        <div class="d-flex flex-row-reverse pl-5 ml-5 my-4" >
+          <button class="btn btn-info col-2" type="submit" [disabled]="!registrationForm.valid" (click)="onSubmit()">המשך <i class="fa fa-long-arrow-left"></i></button>
         </div>
 
       </div>
 
 
 
-      <div class="d-flex flex-row-reverse pl-5 ml-5 my-4">
-        <button class="btn btn-info disabled" type="reset" (click)="onReset()">המשך  ---></button>
-      </div>
-
    </form>
 
- <app-contact></app-contact>
+
+  <p><a routerLink="/contacts">&gt;&gt; נהל אנשי קשר</a></p>
+
+ <!--<app-contact></app-contact>-->
 
 </div>
+
+

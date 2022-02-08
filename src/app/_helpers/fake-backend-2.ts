@@ -20,11 +20,10 @@ let contacts: any[] = contactsJSON ? JSON.parse(contactsJSON) : [{
   address: "רחובות אופנהיימר",
   email: "nikita_jain@amat.com",
 
-
 }];
 
 @Injectable()
-export class FakeBackendInterceptor implements HttpInterceptor {
+export class FakeBackendInterceptor2 implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const { url, method, headers, body } = request;
 
@@ -82,7 +81,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return error(`User with the email ${params.email} already exists`);
       }
 
-
       // update and save contact
       Object.assign(contact, params);
       localStorage.setItem(contactsKey, JSON.stringify(contacts));
@@ -124,9 +122,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   }
 }
 
-export const fakeBackendProvider = {
+export const fakeBackendProvider2 = {
   // use fake backend in place of Http service for backend-less development
   provide: HTTP_INTERCEPTORS,
-  useClass: FakeBackendInterceptor,
+  useClass: FakeBackendInterceptor2,
   multi: true
 };
