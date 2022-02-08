@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from "@angular/forms";
 
-import {MustMatch} from "../_helpers";
-import {contactPersons} from "../_models/contact";
 
 @Component({
   selector: 'app-home',

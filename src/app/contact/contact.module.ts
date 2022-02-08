@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 
 import { LayoutComponent } from './layout.component';
 
-import { AddEditComponent } from './add-edit.component';
 import {ContactsRoutingModule} from "./contact-routing.module";
 import {ContactComponent} from "./contact.component";
 
@@ -17,7 +16,7 @@ import {ContactComponent} from "./contact.component";
     declarations: [
         LayoutComponent,
         ContactComponent,
-        AddEditComponent
+
     ]
 })
 export class ContactsModule { }
